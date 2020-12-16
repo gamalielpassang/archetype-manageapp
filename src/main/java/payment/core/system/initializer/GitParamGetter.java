@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.alpha.gitparamreader;
+package payment.core.system.initializer;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,8 +17,9 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 
 /**
- *
- * @author Nappster-SPRINT-PAY
+ * 
+ * This class help to read value from Git Remote repository
+ * 
  */
 @Data
 public class GitParamGetter {
@@ -76,6 +77,12 @@ public class GitParamGetter {
         
     }
     
+    /**
+     * It help to load propertie file by passing the absolute path of the file on the file system
+     * @param resourceName
+     * @return
+     * @throws FileNotFoundException 
+     */
     public Properties loadPropertiesFromClassPath(String resourceName) throws FileNotFoundException {
 
         Properties properties = new Properties();
@@ -89,12 +96,25 @@ public class GitParamGetter {
         return properties;
     }
     
+    /**
+     * get the value of particular key on the loaded configuration file
+     * @param key
+     * @return
+     * @throws Exception 
+     */
     public String getParam(String key) throws Exception{
         if(propertyfile == null)
             throw new Exception("Configuration file not set on initialization");
         return propertyfile.getProperty(key);
     }
 
+    /**
+     * Get the value of a key on a particular configuration file
+     * @param configfile the relative path of the configutions file on the repository
+     * @param key 
+     * @return
+     * @throws Exception 
+     */
     public String getParam(String configfile, String key) throws Exception{
         if(this.configfilePath == null || !this.configfilePath.equals(configfile)){
             Properties prop = this.loadPropertiesFromClassPath(this.targetCurrent + configfile);
@@ -109,6 +129,11 @@ public class GitParamGetter {
         return propertyfile.getProperty(key);
     }
 
+    /**
+     * Change the current configutations file
+     * @param configfile
+     * @throws FileNotFoundException 
+     */
     public void setConfigFile(String configfile) throws FileNotFoundException{
         this.configfilePath = configfile;
         this.propertyfile = this.loadPropertiesFromClassPath(this.targetCurrent + configfile);

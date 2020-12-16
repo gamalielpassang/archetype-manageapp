@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.alpha.gitparamreader;
+package payment.core.system.initializer;
 
 import java.io.FileNotFoundException;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -26,16 +26,20 @@ public class CronService {
     @Value("${repository.configfile}")
     String configFileName;
     
+    @Value("${repository.branch}")
+    String branch;
+    
     @Value("${repository.key}")
     String keyName;
     
     @Scheduled(cron = "${cron}")
     public void doOperation() throws GitAPIException, FileNotFoundException, Exception{
     
-        GitParamGetter getter = new GitParamGetter(reopUrl, configFileName);
+        GitParamGetter getter = new GitParamGetter(reopUrl, configFileName, branch);
         
         String paramValue = getter.getParam(keyName);
         
+        System.out.println("value = "+paramValue);
         // Ici effectuer le traitement en fonction de la vaiable
         
     }
