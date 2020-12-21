@@ -1,4 +1,4 @@
-package payment.core.system.initializer;
+package com.sprintpay.kyc.conformity.initializer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

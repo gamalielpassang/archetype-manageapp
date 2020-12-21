@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package payment.core.system.initializer;
+package com.sprintpay.kyc.conformity.initializer;
 
 import java.io.File;
 import java.io.FileInputStream;
